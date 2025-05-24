@@ -56,7 +56,7 @@ def main():
 
     # Directory to save figure
     save_dir = args.output_dir
-    save_dir.mkdir(exist_ok=True)
+    save_dir.mkdir(exist_ok=True, parents=True)
     print(f"Saving outputs to {save_dir}")
     print(f"Running process with {args.n_jobs} parallel job(s)")
 
