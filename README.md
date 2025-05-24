@@ -1,5 +1,9 @@
 # OSMnx Plots Batch Script
 
+This is a little fun repo inspired, and using tools from OSMnx
+
+https://github.com/gboeing/osmnx-examples
+
 This script automates the generation and saving of OSMnx transport network plots for a list of places. You can use predefined templates (e.g., `germany_100`, `brandenburg_10`) or provide your own list of places via the command line. Optionally, filenames can be anonymized and a mapping table can be exported.
 
 ## Features
@@ -41,8 +45,10 @@ uv run run_osmnx.py --output_dir ./examples/paris_berlin/encoded --place_names "
 
 ### Use a place template
 
+This will plot the 10 largest cities/towns of the German state of Brandenburg (the region I am living)
+
 ```
-uv run run_osmnx.py --output_dir ./examples/paris_berlin --template brandenburg_10
+uv run run_osmnx.py --output_dir ./examples/brandenburg/clear_names --template brandenburg_10
 ```
 
 ## Arguments
@@ -50,9 +56,10 @@ uv run run_osmnx.py --output_dir ./examples/paris_berlin --template brandenburg_
 | Argument         | Type     | Description                                                                                          |
 |------------------|----------|------------------------------------------------------------------------------------------------------|
 | `--output_dir`   | Path     | **Required.** Directory where plots and the mapping table will be saved.                             |
-| `--template`     | String   | Place template to use, e.g., `germany_100` or `brandenburg_10`. Default: `brandenburg_10`.           |
+| `--template`     | String   | Place template to use, e.g., `germany_100` or `brandenburg_10`. If not set, must use `--place_names`.|
 | `--place_names`  | Strings  | Custom place names (each in double quotes if containing spaces). Overrides the template if provided.  |
 | `--encoded`      | Flag     | If set, filenames will be anonymized and a mapping table will be saved.                              |
+| `--n_jobs`       | Integer  | Number of parallel jobs to use (default: 1).                                                         |
 
 ## Example Output
 
