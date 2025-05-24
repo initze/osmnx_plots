@@ -29,6 +29,10 @@ uv run run_osmnx.py --output_dir ./output_directory
 ```
 uv run run_osmnx.py --output_dir ./examples/paris_berlin/clear_names --place_names "Paris, France" "Berlin, Germany"
 ```
+![Berlin](./examples/paris_berlin/clear_names/berlin_germany.png)
+
+![Paris](./examples/paris_berlin/clear_names/paris_france.png)
+
 
 #### Using anonymized file names (for some quiz fun)
 ```
