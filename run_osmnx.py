@@ -39,10 +39,10 @@ def main():
         help=f"Choose a template from: {list(templates.keys())} (default: brandenburg_10)",
     )
     parser.add_argument(
-    "--n_jobs",
-    type=int,
-    default=1,
-    help="Number of parallel jobs to use (default: 1)",
+        "--n_jobs",
+        type=int,
+        default=1,
+        help="Number of parallel jobs to use (default: 1)",
     )
     args = parser.parse_args()
 
@@ -59,7 +59,7 @@ def main():
     save_dir.mkdir(exist_ok=True)
     print(f"Saving outputs to {save_dir}")
     print(f"Running process with {args.n_jobs} parallel job(s)")
-    
+
     if args.encoded:
         print(
             "File names will be encoded to a random id. Please check the location_ids.tab file"
