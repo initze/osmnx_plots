@@ -3,12 +3,12 @@
 This script automates the generation and saving of OSMnx transport network plots for a list of places. You can use predefined templates (e.g., `germany_100`, `brandenburg_10`) or provide your own list of places via the command line. Optionally, filenames can be anonymized and a mapping table can be exported.
 
 ## Features
-
+- plot road network of the place of you choice
 - Parallel processing of multiple locations for fast results
-- Selection from predefined place templates (`germany_100`, `brandenburg_10`)
 - Add custom places via command line arguments
+- Selection from predefined place templates (`germany_100`, `brandenburg_10`)
 - Optional anonymized filenames (random IDs)
-- Export of the mapping table as a TSV file
+  - Export of the mapping table as a TAB separated file (human and machine readable)
 
 ## Requirements
 
@@ -20,31 +20,25 @@ This script automates the generation and saving of OSMnx transport network plots
 ### Basic usage
 
 ```
-python your_script.py --output_dir ./output_directory
+uv run run_osmnx.py --output_dir ./output_directory
+```
+
+### Provide your own list of places
+
+#### Using the city names in the file name
+```
+uv run run_osmnx.py --output_dir ./examples/paris_berlin/clear_names --place_names "Paris, France" "Berlin, Germany"
+```
+
+#### Using anonymized file names (for some quiz fun)
+```
+uv run run_osmnx.py --output_dir ./examples/paris_berlin/encoded --place_names "Paris, France" "Berlin, Germany" --encoded
 ```
 
 ### Use a place template
 
 ```
-python your_script.py --output_dir ./output_directory --template germany_100
-```
-
-### Provide your own list of places
-
-```
-python your_script.py --output_dir ./output_directory --place_names "Paris, France" "Berlin, Germany"
-```
-
-### Anonymize filenames and export the mapping table
-
-```
-python your_script.py --output_dir ./output_directory --encoded
-```
-
-### Combine all options
-
-```
-python your_script.py --output_dir ./output_directory --template germany_100 --encoded --place_names "Paris, France" "London, UK"
+uv run run_osmnx.py --output_dir ./examples/paris_berlin --template brandenburg_10
 ```
 
 ## Arguments
@@ -64,7 +58,7 @@ python your_script.py --output_dir ./output_directory --template germany_100 --e
 ## Notes
 
 - If `--place_names` is provided, only those places will be used (the template is ignored).
-- Parallel processing uses 3 jobs by default (adjustable in the script).
+- Parallel processing uses 1 job(s) by default (adjustable in the script).
 - Each place name with spaces must be wrapped in double quotes.
 
 ---
