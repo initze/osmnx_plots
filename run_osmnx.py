@@ -1,0 +1,55 @@
+from pathlib import Path
+
+import pandas as pd
+from joblib import Parallel, delayed
+from tqdm import tqdm
+
+from osmnx_plots.location_lists.germany import germany_100, brandenburg_10
+from osmnx_plots.plot_templates import plot_transport_network
+from osmnx_plots.utils.tools import list_to_random_number_dict
+
+import argparse
+
+templates = [germany_100, brandenburg_10]
+
+def main():
+    
+    parser = argparse.ArgumentParser(description="Save a dictionary as a TSV file.")
+    parser.add_argument("--output_dir", type=Path, required=True, help="Directory where the file will be saved", default="figures/v1_roads_dict")
+    parser.add_argument("--encoded", action="store_true", help="If set, the encoded flag will be True")
+    args = parser.parse_args()
+    
+    # Directory to save figure
+    save_dir = args.output_dir
+    save_dir.mkdir(exist_ok=True)
+    print(f"Saving outputs to {save_dir}")
+
+    places_dict = list_to_random_number_dict(brandenburg_10)
+
+
+    if args.encoded:
+        print("File names will be encoded to a random id. Please check the location_ids.tab file")
+        # Create output legend
+        df = pd.DataFrame(list(places_dict.items()), columns=["place", "random_number"])
+        df = df[["random_number", "place"]].sort_values(by="random_number", ascending=True)
+        df.to_csv(save_dir / "location_ids.tab", sep="\t", index=False)
+
+        Parallel(n_jobs=3)(
+            delayed(plot_transport_network)(
+                place_name=place, save_dir=save_dir, layers=[], identifier=places_dict[place]
+            )
+            for place in tqdm(places_dict.keys())
+        )
+    else:
+        Parallel(n_jobs=3)(
+            delayed(plot_transport_network)(
+                place_name=place, save_dir=save_dir, layers=[]
+            )
+            for place in tqdm(places_dict.keys())
+        )
+
+
+
+
+if __name__ == "__main__":
+    main()
