@@ -31,13 +31,20 @@ def main():
         default=None,  # Explicitly set default to None
         help='List of place names, each in double quotes if containing spaces (e.g. --place_names "Paris, France" "Berlin, Germany")',
     )
+    parser.add_argument(
+        "--template",
+        type=str,
+        choices=list(templates.keys()),
+        default=None,
+        help=f"Choose a template from: {list(templates.keys())} (default: brandenburg_10)",
+    )
     args = parser.parse_args()
 
     # setup location names
-    if not args.place_names:
-        places_list = brandenburg_10
-    else:
+    if args.place_names:
         places_list = args.place_names
+    else:
+        places_list = templates[args.template]
 
     places_dict = list_to_random_number_dict(places_list)
 
