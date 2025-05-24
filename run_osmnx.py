@@ -5,11 +5,24 @@ import pandas as pd
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
+from osmnx_plots.location_lists.europe import *
 from osmnx_plots.location_lists.germany import brandenburg_10, germany_100
 from osmnx_plots.plot_templates import plot_transport_network
 from osmnx_plots.utils.tools import list_to_random_number_dict
 
-templates = dict(germany_100=germany_100, brandenburg_10=brandenburg_10)
+templates = {
+    "germany_100": germany_100,
+    "brandenburg_10": brandenburg_10,
+    "france_10": france_10,
+    "italy_10": italy_10,
+    "uk_10": uk_10,
+    "spain_10": spain_10,
+    "poland_10": poland_10,
+    "sweden_10": sweden_10,
+    "portugal_10": portugal_10,
+    "austria_10": austria_10,
+    "switzerland_10": switzerland_10,
+}
 
 
 def main():
